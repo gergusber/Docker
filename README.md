@@ -27,3 +27,8 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
   >**docker start -a <CONTAINER_NAME>**: Que es lo mismo que vimos anteriormente para (atacharse a un container)
   >**docker start -i <CONTAINER_NAME>**: para visualizar la ventana interactiva 
   >**docker start -a -i <CONTAINER_NAME>**
+
+- **docker stop <CONTAINER_NAME>**: para un container que esta levantado
+- **docker rm <CONTAINER_NAME>**: borra un container 
+- **docker rm <CONTAINER_NAME> <CONTAINER_NAME> <CONTAINER_NAME> <CONTAINER_NAME> <CONTAINER_NAME>**: borra varios containers(separados por un espacio) 
+- **docker container prune**: borra todos los containers que esten parados 
