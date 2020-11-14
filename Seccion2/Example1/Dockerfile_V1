@@ -4,16 +4,12 @@ FROM node
 # directorio donde se va a trabajar 
 WORKDIR /app   
 
-#primero copiamos el package json para poder generar el npm install y con esto no tener que correr siempre el npm install
-COPY package.json /app
-
-RUN npm install
-
-
 # Especificamos que el "." es el directorio del proyecto /Example1/ .. pero al cambiar el workdir, 
 # ahora pasamos de . source al /app 
 # Si quisieramos podriamos poner COPY . . <={este ultimo .}(ya trabajando en /app por el workdir)
 COPY . /app
+
+RUN npm install
 
 #esto sirve para documentar
 #Con esto vemos el puerto 80 desde nuestra pc, sino no va a poder comunicarse con un contenedor 
