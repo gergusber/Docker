@@ -22,6 +22,8 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
 	>**docker run -t <CONTAINER_NAME>**:allocate a pseudo-tty (crea una terminal para comunicarse )
   >Si combinamos el it, nos permite ingresar datos y a su vez permitir que quede abierta la sesion del terminal
   >El comando quedaria **docker run -i -t <CONTAINER_NAME>** o **docker run -it <CONTAINER_NAME>**(utilizando los 2 en un solo comando)
+  >**docker run --rm <CONTAINER_NAME>**: automatically remove the container when stop
+
 
   A su vez, para cuando queremos levantar un container que ya corrió. no son los mismo parametros mostrados anteriormente
   >**docker start -a <CONTAINER_NAME>**: Que es lo mismo que vimos anteriormente para (atacharse a un container)
@@ -32,3 +34,8 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
 - **docker rm <CONTAINER_NAME>**: borra un container 
 - **docker rm <CONTAINER_NAME> <CONTAINER_NAME> <CONTAINER_NAME> <CONTAINER_NAME> <CONTAINER_NAME>**: borra varios containers(separados por un espacio) 
 - **docker container prune**: borra todos los containers que esten parados 
+
+## IMAGES
+
+- **docker images**: lista todas las  imagenes que estan en la pc
+- **docker rmi <IMAGE_NAME>**: borrar imagen  
