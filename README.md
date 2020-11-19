@@ -35,7 +35,24 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
 - **docker rm <CONTAINER_NAME> <CONTAINER_NAME> <CONTAINER_NAME> <CONTAINER_NAME> <CONTAINER_NAME>**: borra varios containers(separados por un espacio) 
 - **docker container prune**: borra todos los containers que esten parados 
 
+
+- **EJEMPLO Repaso: (Ejemplo 1, seccion 2)**
+  docker run -p 3000:80 -d --rm f1974cfde44f
+   En este ejemplo podemos ver que:
+      > -p : se expone el puerto 3000 sobre el 80 para poder acceder
+      > -d : (detached mode) para que nos permita poder seguir utilizando la consola
+      > --rm : para asegurarnos que se borre el container una vez que se pare el container
+
+
+- **docker cp <path_carpeta> <container_name>:<path_destination>**: copiar los archivos de una carpeta a un contenedor ya creado
+  > <path_carpeta> : Puede ser dummy/text.txt o dummy/.(para todos los archivos dentro de esa carpeta)
+  > <container_name>: nombre del container corriendo para donde se van a meter esos archivos
+  > <path_destination>: el folder donde va a ir a parar lo que se quiera llevar, por ej : /test<- Este path se crea si no existe anteriormente
+   
+ 
+
 ## IMAGES
 
 - **docker images**: lista todas las  imagenes que estan en la pc
 - **docker rmi <IMAGE_NAME>**: borrar imagen  
+- **docker images inspect <image_id>** para ver las configuraciones que se hicieron en la imagen
