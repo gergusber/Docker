@@ -17,12 +17,16 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
 -  **docker attach <CONTAINER_NAME>**: con este comando podes ATACHARTE A UN PROCESO PARA VER LOS OUTPUTS 
 -  **docker logs <CONTAINER_NAME>**: con este comando podemos ver los logs anteriores de este container 
 
-- **utilizar consola**: Cuando tenemos un codigo que necesitemos levantar en consola, tenemos 2 formas de utilizarlo
-	>**docker run -i <CONTAINER_NAME>**, :interactive " UTILIZA EL STDIN aunq no este atachada la terminal "
-	>**docker run -t <CONTAINER_NAME>**:allocate a pseudo-tty (crea una terminal para comunicarse )
-  >Si combinamos el it, nos permite ingresar datos y a su vez permitir que quede abierta la sesion del terminal
-  >El comando quedaria **docker run -i -t <CONTAINER_NAME>** o **docker run -it <CONTAINER_NAME>**(utilizando los 2 en un solo comando)
-  >**docker run --rm <CONTAINER_NAME>**: automatically remove the container when stop
+- ###**utilizar consola**: Cuando tenemos un codigo que necesitemos levantar en consola, tenemos 2 formas de utilizarlo
+- **docker run -i <CONTAINER_NAME>**, :interactive " UTILIZA EL STDIN aunq no este atachada la terminal "
+- **docker run -t <CONTAINER_NAME>**:allocate a pseudo-tty (crea una terminal para comunicarse )
+    >Si combinamos el it, nos permite ingresar datos y a su vez permitir que quede abierta la sesion del terminal
+    >El comando quedaria **docker run -i -t <CONTAINER_NAME>** o **docker run -it <CONTAINER_NAME>**(utilizando los 2 en un solo comando)
+- **docker run --rm <CONTAINER_NAME>**: automatically remove the container when stop
+   
+- **docker run --name <my_name>** : crear tags para un container, asi podemos buscarlo mas facil en el docker ps 
+
+- **docker run --name <my_name> goals:latest** para especificar una imagen a la cual le creamos el nombre (repository:tag) 
 
 
   A su vez, para cuando queremos levantar un container que ya corrió. no son los mismo parametros mostrados anteriormente
@@ -48,11 +52,16 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
   > <path_carpeta> : Puede ser dummy/text.txt o dummy/.(para todos los archivos dentro de esa carpeta)
   > <container_name>: nombre del container corriendo para donde se van a meter esos archivos
   > <path_destination>: el folder donde va a ir a parar lo que se quiera llevar, por ej : /test<- Este path se crea si no existe anteriormente
-   
- 
 
 ## IMAGES
 
 - **docker images**: lista todas las  imagenes que estan en la pc
 - **docker rmi <IMAGE_NAME>**: borrar imagen  
 - **docker images inspect <image_id>** para ver las configuraciones que se hicieron en la imagen
+- **docker prune -a** para borrar todas las imagenes que estan descargadas en el sistema
+
+- **docker  build .** : crear tags para una imagen, para esto se usan 2 partes, name:tag,
+    > name o "repositorio": se puede crear un grupo de posibles imagenes
+    > tag: mas especial por ahi mostrar diferentes versiones y utilizar la capacidad de tener distintas imagenes de distintos codigos 
+  por ejemplo: docker build -t goals:latest . 
+    > En esta imagen el -t indica el tag, goals : repositorio  y latest :el tag
