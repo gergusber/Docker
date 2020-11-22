@@ -1,4 +1,5 @@
 FROM node
+
 WORKDIR /myapp
 
 COPY package.json /myapp

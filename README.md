@@ -67,6 +67,12 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
     > En esta imagen el -t indica el tag, goals : repositorio  y latest :el tag
 
 
+## PUSHING IMAGES
+ - **docker push <Image_name>**: Para subir al hub de docker nuestras imagenes y poder compartirlas
+ - **docker pull <Image_name>**: Para obtener desde el hub de docker las imagenes que nos compartieron
+
 
     ejemplos:
     docker run -p 3000:3000 --name nodeApp --rm 30729232ebfc
+
+
