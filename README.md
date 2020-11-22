@@ -60,8 +60,13 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
 - **docker images inspect <image_id>** para ver las configuraciones que se hicieron en la imagen
 - **docker prune -a** para borrar todas las imagenes que estan descargadas en el sistema
 
-- **docker  build .** : crear tags para una imagen, para esto se usan 2 partes, name:tag,
+- **docker build -t goals:latest .** : crear tags para una imagen, para esto se usan 2 partes, name:tag,
     > name o "repositorio": se puede crear un grupo de posibles imagenes
     > tag: mas especial por ahi mostrar diferentes versiones y utilizar la capacidad de tener distintas imagenes de distintos codigos 
   por ejemplo: docker build -t goals:latest . 
     > En esta imagen el -t indica el tag, goals : repositorio  y latest :el tag
+
+
+
+    ejemplos:
+    docker run -p 3000:3000 --name nodeApp --rm 30729232ebfc
