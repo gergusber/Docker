@@ -76,3 +76,26 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
     docker run -p 3000:3000 --name nodeApp --rm 30729232ebfc
 
 
+## Docker volumes:
+nos ayuda con la persistencia de data y nos ayuda con los problemas de que nos borre la informacion de los containers
+conecta una carpeta en nuestra maquina y puede ser utilizada por la pc, pero esta, hace que la data que se creo en ese volume, quede persistente en la pc del host
+
+//EN EL DOCKER FILE: 
+VOLUME [ "/app/feedback" ]
+
+- HAY 2 TIPOS DE VOLUMES:
+ > Anonymus  volumes  que viven cuanto el contenedor esta  activo, si borramos el contenedor el volumen tambien se borra. estos los usamos para que viva en un scope especifico pero si borramos el container o le ponsemos el --rm, al pararlo se borrara
+ > Named volumes, estos viven en el host machine , estos van a servir para parar el contenedor pero. van a seguir viviendo 
+
+- **Crear un named Volume**:
+  > docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
+  - feedback es el nombre del volume, y /app/feedback el
+- **Removing Anonymous Volumes**
+  We saw, that anonymous volumes are removed automatically, when a container is removed.
+  This happens when you start / run a container with the --rm option.
+  If you start a container without that option, the anonymous volume would NOT be removed, even if you remove the container (with docker rm ...).
+  Still, if you then re-create and re-run the container (i.e. you run docker run ... again), a new anonymous volume will be created. So even though the anonymous volume wasn't removed automatically, it'll also not be helpful because a different anonymous volume is attached the next time the container starts (i.e. you removed the old container and run a new one).
+  Now you just start piling up a bunch of unused anonymous volumes - you can clear them via docker volume rm VOL_NAME or docker volume prune.
+
+>https://headsigned.com/posts/mounting-docker-volumes-with-docker-toolbox-for-windows/
+
