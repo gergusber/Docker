@@ -76,7 +76,7 @@ este caso es: docker run -p <Puerto_app>:<Puerto_pc>
     docker run -p 3000:3000 --name nodeApp --rm 30729232ebfc
 
 
-## Docker volumes:
+# Docker volumes:
 nos ayuda con la persistencia de data y nos ayuda con los problemas de que nos borre la informacion de los containers
 conecta una carpeta en nuestra maquina y puede ser utilizada por la pc, pero esta, hace que la data que se creo en ese volume, quede persistente en la pc del host
 
@@ -99,3 +99,19 @@ VOLUME [ "/app/feedback" ]
 
 >https://headsigned.com/posts/mounting-docker-volumes-with-docker-toolbox-for-windows/
 
+
+ ## bind mounts:
+      Como desarrolladores seteamos el path donde vamos aguardar "algo"
+      Se pone otro "volume" que el scope sea, el proyecto y que vaya a parar al path especificado de la carpeta (workdir) del proyecto
+      "docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "C:/Cursos/docker/Docker/Seccion3/43/data-volumes-01-starting-setup/data-volumes-01-starting-setup:/app" feedback-node:volumes"
+     
+      docker run -d -p 3000:80 --name, -v folder:pathFolderInsideContainer -v LocationPath:workdir
+
+      Bind Mounts - Shortcuts
+        Just a quick note: If you don't always want to copy and use the full path, you can use these shortcuts:
+
+        macOS / Linux: -v $(pwd):/app
+
+        Windows: -v "%cd%":/app
+
+        I don't use them in the lectures, since I want to show an approach that works for everyone (and I don't want to switch between both all the time), but you can use these shortcuts depending on which OS you are working on to save some typing.
