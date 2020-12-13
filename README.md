@@ -83,13 +83,42 @@ conecta una carpeta en nuestra maquina y puede ser utilizada por la pc, pero est
 //EN EL DOCKER FILE: 
 VOLUME [ "/app/feedback" ]
 
+
+
 - HAY 2 TIPOS DE VOLUMES:
  > Anonymus  volumes  que viven cuanto el contenedor esta  activo, si borramos el contenedor el volumen tambien se borra. estos los usamos para que viva en un scope especifico pero si borramos el container o le ponsemos el --rm, al pararlo se borrara
  > Named volumes, estos viven en el host machine , estos van a servir para parar el contenedor pero. van a seguir viviendo 
+ > bind mounts: Son los que nos bindean un path de unuestra pc a la carpeta (basicamente el nombre del volume es nuestro path de desarrollo)
+
+- Crear un Anonymous volume :
+   > docker run -v /app/data
+   Se crea un volume junto a un container (vive mientras este viva) sobrevive si se para el container y se vuelve a levantar pero no mientras se borre con un --rm
+   Este al borrarse cuando se borra un container, no sirve para  compartir data entre distintos containers y no se puede reutilizar para guardar infomacion para cuadno se quiere parar y levantar un container .
+   Son buenos para guardar informacion como el nodemodules dentro de un node o guardar informacion para que no sea sobreescrita por otro modulo 
+
+- Crear un named volume :
+   > docker run -v data:/app/data
+  no pueden ser creados en el dockerfile sino que se crean cuando se cera el container con el -v.
+  se crean en general, sobreviven a que se apague el container y vuelva a crearse.
+  Se pueden utilizar para compartir informacion entre containers.
+  Se pueden Utilizar para guardar informacion para containers y estos se pueden borrar y volver a levantarse mientras q se llame igual se puede recuperar esta informacion.
+  La contra de estos es que no sabemos donde estan guardados en nuestro sistema, sino que docker se encarga de gestionarlos
+
+
+- Crear un Anonymous volume :
+   > docker run -v /path/to/code:/app/data 
+  Sabemos su lugar de ubicacion. y no estan atachados a un container sino que pueden utilizarse para varios containers 
+   Se pueden utilizar para compartir informacion entre containers. y pueden sobrevivir a restart o removal container
+    Se pueden utilizar para compartir informacion entre containers.
+    Se pueden Utilizar para guardar informacion para containers y estos se pueden borrar y volver a levantarse mientras q se llame igual se puede recuperar esta informacion.
+  
+
+
 
 - **Crear un named Volume**:
   > docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
   - feedback es el nombre del volume, y /app/feedback el
+  
 - **Removing Anonymous Volumes**
   We saw, that anonymous volumes are removed automatically, when a container is removed.
   This happens when you start / run a container with the --rm option.
@@ -101,7 +130,7 @@ VOLUME [ "/app/feedback" ]
 
 
  ## bind mounts:
-      Como desarrolladores seteamos el path donde vamos aguardar "algo"
+    > Como desarrolladores seteamos el path donde vamos aguardar "algo"
       Se pone otro "volume" que el scope sea, el proyecto y que vaya a parar al path especificado de la carpeta (workdir) del proyecto
       "docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "C:/Cursos/docker/Docker/Seccion3/43/data-volumes-01-starting-setup/data-volumes-01-starting-setup:/app" feedback-node:volumes"
      
@@ -115,3 +144,18 @@ VOLUME [ "/app/feedback" ]
         Windows: -v "%cd%":/app
 
         I don't use them in the lectures, since I want to show an approach that works for everyone (and I don't want to switch between both all the time), but you can use these shortcuts depending on which OS you are working on to save some typing.
+     
+     
+     Ejemplo de ambiente de desarrollo utilizando bind mounts: 
+     docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "C:/Cursos/docker/Docker/Seccion3/43/data-volumes-01-starting-setup/data-volumes-01-starting-setup:/app" -v /app/node_modules feedback-node:volumes     
+     
+     Ejemplo de ambiente de desarrollo utilizando bind mounts pero utilizando el parametro :ro para que sea readonly: 
+     docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "C:/Cursos/docker/Docker/Seccion3/43/data-volumes-01-starting-setup/data-volumes-01-starting-setup:/app:ro" -v /app/node_modules feedback-node:volumes
+      En este ejemplo existe un problema ya que la carpeta /app/temp y /app/feedback necesitan permisos para modificarse desde la app.
+      para esto debemos especificar un volume para dichas carpetas y que estas no esten dentro del ReadOnly proporcionado ya que 
+      los permisos y los permisos que se van dando van de highorder a lessOrder, para esto tenemos que especificar un volume para dicha carpeta
+      y que no este comprendido en el volume que tenga el ro, digamoslos asi, mientras mas largo el path del volume tiene mas importancia
+       por ende creamos otro con este : 
+       docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "C:/Cursos/docker/Docker/Seccion3/43/data-volumes-01-starting-setup/data-volumes-01-starting-setup:/app:ro" -v /app/temp  -v /app/node_modules feedback-node:volumes
+
+     Algo que 
