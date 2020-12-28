@@ -158,4 +158,7 @@ VOLUME [ "/app/feedback" ]
        por ende creamos otro con este : 
        docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "C:/Cursos/docker/Docker/Seccion3/43/data-volumes-01-starting-setup/data-volumes-01-starting-setup:/app:ro" -v /app/temp  -v /app/node_modules feedback-node:volumes
 
-     Algo que 
+    Environments:
+
+      Para esto tenemos que usar el "PORT nRO" en el dockerfile y agregar el $PORT en el environment que se va a hacer export 
+      
