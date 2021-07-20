@@ -11,3 +11,13 @@ and run : to create the image
 - docker build -t goals-node . => To create the image of this file
 - docker run --name goals-backend --rm -d -p 80:80 goals-node = > To create the container
   Remember to use -p to map the port 80 to the 80 to my machine
+
+3: The react app:
+
+Create the dockerfile for frontend(keep in mind that the port is 3000)
+Run the container
+
+Build your image :
+
+- docker build -t goals-react .
+- docker run --name goals-frontend --rm -p 3000:3000 -it goals-react
