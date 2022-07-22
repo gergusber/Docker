@@ -155,6 +155,10 @@ VOLUME [ "/app/feedback" ]
 ## Docker Networks:
 
 - para acceder a la ip de nuestra maquina(localhost) desde dentro de un container debemos usar "host.docker.internal"
-
 - docker network create <Name> : Se crea una network para que los containers puedan comunicarse entre si
 - docker network ls : Lista todas las netwokrs quehay corriendo
+
+
+## Test Seccion5:
+
+  - para acceder a la ip de nuestra maquina(localhost) desde dentro de un container debemos usar "host.docker.internal"
