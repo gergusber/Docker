@@ -10,12 +10,12 @@ const Goal = require("./models/goal");
 
 const app = express();
 
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "logs", "access.log"),
-  { flags: "a" }
-);
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, "logs", "access.log"),
+//   { flags: "a" }
+// );
 
-app.use(morgan("combined", { stream: accessLogStream }));
+// app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use(bodyParser.json());
 
@@ -82,7 +82,7 @@ app.delete("/goals/:id", async (req, res) => {
     res.status(500).json({ message: "Failed to delete goal." });
   }
 });
-
+//mongodb://127.0.0.1:3006/course-goals
 mongoose.connect(
   "mongodb://host.docker.internal:27017/course-goals",
   {
