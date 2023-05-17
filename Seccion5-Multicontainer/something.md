@@ -4,7 +4,8 @@ docker run --name mongodb --rm -p 27017:27017 -d mongo
 To run a mongodb and expose the port 27017 that is the port that is defined
 
 2:
-we create the docker file and we use the "mongodb://host.docker.internal:27017/course-goals",
+we create the docker file and we use the "mongodb://host.docker.internal:27017/course-goals", 
+if u are using linux you should use your internal ip. instead of <host.docker.internal>
 to connect to our "localhost"
 and run : to create the image
 
@@ -20,4 +21,4 @@ Run the container
 Build your image :
 
 - docker build -t goals-react .
-- docker run --name goals-frontend --rm -p 3000:3000 -it goals-react
+- docker run --name goals-frontend --rm -p 3000:3000 -it goals-react // quick note here, do not forget about the ** -it **  bc it wont work 
