@@ -67,3 +67,9 @@ now, we generate development server onbackned with volumes to update it.
 
 docker run --name goals-backend -v /home/german/cursos/Docker/Seccion5-Multicontainer/backend:/app -v logs:/app/logs -v /app/node_modules --rm -d -p 80:80 --network goals-net goals-node
 
+
+now we update the frontend to can update it during development process
+
+- docker run --name goals-frontend -v /home/german/cursos/Docker/Seccion5-Multicontainer/frontend/src:/app --rm -p 3000:3000 -it goals-react
+- docker run --name goals-frontend --rm -p 3000:3000 -it goals-react
+
