@@ -22,3 +22,24 @@ Build your image :
 
 - docker build -t goals-react .
 - docker run --name goals-frontend --rm -p 3000:3000 -it goals-react // quick note here, do not forget about the ** -it **  bc it wont work 
+
+
+now, we will set them into a network:
+for that, first create the network:
+
+
+- docker network create goals-net
+
+now we run again the mongodb, this time without port due is running in the 27017 in local network. and specify network tag.
+
+- docker run --name mongodb --rm -d --network goals-net mongo
+
+now its time for backend server.
+we need to update the port of the "localhost of the network "
+- docker build -t goals-node . ( to update the path to "mongodb://mongodb:27017/course-goals")
+- docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+
+now the frontend:
+ we need to update the backend url that is published in the port 80.
+- docker build -t goals-react .
+- docker run --name goals-frontend --rm -p 3000:3000 -it goals-react 

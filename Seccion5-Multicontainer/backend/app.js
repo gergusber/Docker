@@ -84,7 +84,7 @@ app.delete("/goals/:id", async (req, res) => {
 });
 //mongodb://127.0.0.1:3006/course-goals
 mongoose.connect(
-  "mongodb://192.168.0.19:27017/course-goals",
+  "mongodb://mongodb:27017/course-goals",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
