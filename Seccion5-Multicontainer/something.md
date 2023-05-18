@@ -43,3 +43,27 @@ now the frontend:
  we need to update the backend url that is published in the port 80.
 - docker build -t goals-react .
 - docker run --name goals-frontend --rm -p 3000:3000 -it goals-react 
+
+
+for mongo persistance 
+we stop the mongodb: > docker stop mongodb
+and we assign a volume 
+- docker run --name mongodb --rm -d -v data:/data/db --network goals-net mongo
+
+but we also want to add username and password to the mongodb :
+MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD
+
+- docker run --name mongodb --rm -d -v data:/data/db --network goals-net -e MONGO_INITDB_ROOT_USERNAME=german -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
+
+so after this we need to update the connection string in app.js of backend
+docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node.
+
+
+now, we generate development server onbackned with volumes to update it.
+3 volumes:
+1rst one for the development server
+2nd for the logs folder
+3rd one for the nodemodules.
+
+docker run --name goals-backend -v /home/german/cursos/Docker/Seccion5-Multicontainer/backend:/app -v logs:/app/logs -v /app/node_modules --rm -d -p 80:80 --network goals-net goals-node
+
