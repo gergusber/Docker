@@ -85,6 +85,8 @@ app.delete("/goals/:id", async (req, res) => {
   }
 });
 //mongodb://127.0.0.1:3006/course-goals
+// `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/course-goals?authSource=admin`,
+  
 mongoose.connect(
   "mongodb://mongodb:27017/course-goals",
   {
