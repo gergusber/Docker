@@ -2,8 +2,45 @@ version: '3.8'
 services:
   mongodb:
     image: mongo
+    volumes:
+      - data:/data/db
     container_name: mongodb
     ports:
       - "27017:27017"
+    # environment:
+      # MONGO_INITDB_ROOT_USERNAME: max
+      # MONGO_INITDB_ROOT_PASSWORD: secret
+      # - MONGO_INITDB_ROOT_USERNAME=max
+      # - MONGO_INITDB_ROOT_PASSWORD=secret
+    env_file:  #here we can create an env file with the data 
+      - ./env/mongo.env
   backend:
+    build: ./backend
+    # build: 
+    #   context: ./backend
+    #   dockerfile: Dockerfile # here we can specify different names for the file
+    #   args:
+    #     some-arg : 1
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - ./env/backend.env
+    ports:
+      - '80:80'
+    depends_on:
+      - mongodb
   frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/src:/app/src
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+volumes:
+  data:
+  logs:
